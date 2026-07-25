@@ -40,14 +40,19 @@ phases:
   build:
     commands:
 
-      - databricks workspace --help
-      - databricks workspace import --help
-      
-      - echo "===== Listing DBFS Root ====="
-      - databricks fs ls dbfs:/
+      - echo "Creating workspace folder"
+      - databricks workspace mkdirs /Workspace/Users/YOUR_EMAIL/customer-demo
 
-      - echo "===== Listing Workspace ====="
-      - databricks fs ls dbfs:/Workspace || true
+      - echo "Importing Python file"
+      - databricks workspace import \
+          /Workspace/Users/YOUR_EMAIL/customer-demo/customer_job.py \
+          --file src/customer_job.py \
+          --format SOURCE \
+          --language PYTHON \
+          --overwrite
+
+      - echo "Listing workspace"
+      - databricks workspace list /Workspace/Users/YOUR_EMAIL/customer-demo
 
 
   post_build:
