@@ -1,7 +1,7 @@
 from pyspark.sql import SparkSession
 
 spark = SparkSession.builder \
-    .appName("CustomerDemo") \
+    .appName("CustomerDemo-v2") \
     .getOrCreate()
 
 data = [
