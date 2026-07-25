@@ -4,11 +4,15 @@ phases:
 
   install:
     commands:
+      - echo "Installing Databricks CLI..."
       - pip install databricks-cli
 
   pre_build:
     commands:
+      - echo "Configuring Databricks CLI..."
+
       - mkdir -p ~/.databricks
+
       - |
         cat > ~/.databrickscfg <<EOF
         [DEFAULT]
@@ -30,4 +34,19 @@ phases:
 
   build:
     commands:
+
+      - echo "===== Listing DBFS Root ====="
       - databricks fs ls dbfs:/
+
+      - echo "===== Listing Workspace ====="
+      - databricks fs ls dbfs:/Workspace || true
+
+      - echo "===== Uploading Python File ====="
+      - databricks fs cp src/customer_job.py dbfs:/Workspace/customer_job.py --overwrite
+
+      - echo "===== Verifying Upload ====="
+      - databricks fs ls dbfs:/Workspace
+
+  post_build:
+    commands:
+      - echo "Build Completed"
