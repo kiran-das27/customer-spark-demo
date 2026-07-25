@@ -4,17 +4,11 @@ phases:
 
   install:
     commands:
-      - echo Installing Databricks CLI
       - pip install databricks-cli
-
 
   pre_build:
     commands:
-
-      - echo Configuring Databricks
-
       - mkdir -p ~/.databricks
-
       - |
         cat > ~/.databrickscfg <<EOF
         [DEFAULT]
@@ -22,18 +16,18 @@ phases:
         token=$DATABRICKS_TOKEN
         EOF
 
+      - echo "===== CLI VERSION ====="
+      - databricks --version
+
+      - echo "===== HOST ====="
+      - echo $DATABRICKS_HOST
+
+      - echo "===== TOKEN LENGTH ====="
+      - echo ${#DATABRICKS_TOKEN}
+
+      - echo "===== CONFIG ====="
+      - cat ~/.databrickscfg
 
   build:
     commands:
-
-      - echo Uploading Spark file
-
-      - databricks fs mkdirs dbfs:/customer-demo
-
-      - databricks fs cp src/customer_job.py dbfs:/customer-demo/customer_job.py --overwrite
-
-
-  post_build:
-    commands:
-
-      - echo Deployment completed
+      - databricks fs ls dbfs:/
