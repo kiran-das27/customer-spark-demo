@@ -40,6 +40,8 @@ phases:
   build:
     commands:
 
+      - databricks workspace --help
+      
       - echo "===== Listing DBFS Root ====="
       - databricks fs ls dbfs:/
 
