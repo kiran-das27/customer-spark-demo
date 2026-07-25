@@ -41,6 +41,7 @@ phases:
     commands:
 
       - databricks workspace --help
+      - databricks workspace import --help
       
       - echo "===== Listing DBFS Root ====="
       - databricks fs ls dbfs:/
@@ -48,11 +49,6 @@ phases:
       - echo "===== Listing Workspace ====="
       - databricks fs ls dbfs:/Workspace || true
 
-      - echo "===== Uploading Python File ====="
-      - databricks fs cp src/customer_job.py dbfs:/Workspace/customer_job.py --overwrite
-
-      - echo "===== Verifying Upload ====="
-      - databricks fs ls dbfs:/Workspace
 
   post_build:
     commands:
