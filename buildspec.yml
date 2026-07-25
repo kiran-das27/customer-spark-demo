@@ -4,8 +4,13 @@ phases:
 
   install:
     commands:
-      - echo "Installing Databricks CLI..."
-      - pip install databricks-cli
+      - echo "Installing Databricks CLI"
+
+      - curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+
+      - export PATH="$HOME/.databricks/bin:$PATH"
+
+      - databricks version
 
   pre_build:
     commands:
