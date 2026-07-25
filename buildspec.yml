@@ -46,14 +46,14 @@ phases:
       - echo "Importing Python file"
       - | 
         databricks workspace import \
-          /Workspace/Users/YOUR_EMAIL/customer-demo/customer_job.py \
+          /Workspace/Users/kiran.das27@gmail.com/customer-demo/customer_job.py \
           --file src/customer_job.py \
           --format SOURCE \
           --language PYTHON \
           --overwrite
 
       - echo "Listing workspace"
-      - databricks workspace list /Workspace/Users/YOUR_EMAIL/customer-demo
+      - databricks workspace list /Workspace/Users/kiran.das27@gmail.com/customer-demo
 
 
   post_build:
